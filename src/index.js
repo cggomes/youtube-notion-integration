@@ -1,5 +1,6 @@
 const { google } = require('googleapis');
 
+const retrieveDataFromUser = require('./utils/userInputUtil');
 const YoutubeAuth = require('./auth/youtubeAuth');
 const FileUtil = require('./utils/fileUtil');
 const YouTubeAPI = require('./api/youtube');
@@ -16,5 +17,7 @@ const youtubeAPI = new YouTubeAPI({ google });
     redirect_url: clientSecret.installed.redirect_uris[0],
   });
 
-  youtubeAPI.getChannel(auth);
+  const channelId = await retrieveDataFromUser('Enter the channel id: ');
+
+  youtubeAPI.getChannel({ auth, channelId });
 })();

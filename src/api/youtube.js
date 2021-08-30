@@ -4,13 +4,13 @@ class YouTubeAPI {
     this.google = google;
   }
 
-  getChannel(auth) {
+  getChannel({ auth, channelId }) {
     const service = this.google.youtube('v3');
 
     service.channels.list({
       auth: auth,
       part: 'snippet,contentDetails,statistics',
-      forUsername: 'GoogleDevelopers'
+      id: channelId,
     }, function(err, response) {
       if (err) {
         console.log('The API returned an error: ' + err);
