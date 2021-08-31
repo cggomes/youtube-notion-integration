@@ -17,7 +17,14 @@ const youtubeAPI = new YouTubeAPI({ google });
     redirect_url: clientSecret.installed.redirect_uris[0],
   });
 
+  
   const channelId = await retrieveDataFromUser('Enter the channel id: ');
+  const channels = await youtubeAPI.getChannels({ auth, channelId });
+  const playlists = await youtubeAPI.getPlaylists({ auth, channelId: channels[0].id });
 
-  youtubeAPI.getChannel({ auth, channelId });
+  if (playlists) {
+    const videos = await youtubeAPI.getVideosFromPlaylist({ auth, playlistId: playlists[0].id });
+    console.log(videos);
+  }
+
 })();
