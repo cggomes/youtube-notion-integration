@@ -4,28 +4,45 @@ class YouTubeAPI {
     this.google = google;
   }
 
-  getChannel({ auth, channelId }) {
-    const service = this.google.youtube('v3');
+  getChannels({ auth, channelId }) {
+    return new Promise((resolve, reject) => {
+      const service = this.google.youtube('v3');
+  
+      service.channels.list({
+        auth: auth,
+        part: 'snippet,contentDetails,statistics',
+        id: channelId,
+      }, (err, response) => 
+        err ? reject('The API returned an error: ' + err) : resolve(response.data.items)
+      );
+    });
+  }
 
-    service.channels.list({
-      auth: auth,
-      part: 'snippet,contentDetails,statistics',
-      id: channelId,
-    }, function(err, response) {
-      if (err) {
-        console.log('The API returned an error: ' + err);
-        return;
-      }
-      const channels = response.data.items;
-      if (channels.length == 0) {
-        console.log('No channel found.');
-      } else {
-        console.log('This channel\'s ID is %s. Its title is \'%s\', and ' +
-                    'it has %s views.',
-                    channels[0].id,
-                    channels[0].snippet.title,
-                    channels[0].statistics.viewCount);
-      }
+  getPlaylists({ auth, channelId }) {
+    return new Promise((resolve, reject) => {
+      const service = this.google.youtube('v3');
+  
+      service.playlists.list({
+        channelId,
+        auth,
+        part: 'contentDetails,snippet'
+      }, (err, response) => 
+        err ? reject('The API returned an error: ' + err) : resolve(response.data.items)
+      );
+    });
+  }
+
+  getVideosFromPlaylist({ auth, playlistId }) {
+    return new Promise((resolve, reject) => {
+      const service = this.google.youtube('v3');
+  
+      service.playlistItems.list({
+        playlistId,
+        auth,
+        part: 'contentDetails,snippet'
+      }, (err, response) => 
+        err ? reject('The API returned an error: ' + err) : resolve(response.data.items)
+      );
     });
   }
 
