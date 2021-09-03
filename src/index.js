@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { google } = require('googleapis');
 
 const retrieveDataFromUser = require('./utils/userInputUtil');

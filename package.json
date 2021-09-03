@@ -14,6 +14,7 @@
   "author": "Christian Gustavo Ribeiro Gomes",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "google-auth-library": "^7.6.2",
     "googleapis": "^84.0.0"
   }
