@@ -7,6 +7,7 @@ const YoutubeAuth = require('./auth/youtubeAuth');
 const FileUtil = require('./utils/fileUtil');
 const YouTubeAPI = require('./api/youtube');
 const NotionAPI = require('./api/notion');
+const { retrievePlaylistData, mappedVideos } = require('./youtube/utils');
 
 const youtubeAuth = new YoutubeAuth({ google });
 const youtubeAPI = new YouTubeAPI({ google });
@@ -27,10 +28,13 @@ const notionAPI = new NotionAPI();
   const playlists = await youtubeAPI.getPlaylists({ auth, channelId: channels[0].id });
 
   if (playlists) {
-    const videos = await youtubeAPI.getVideosFromPlaylist({ auth, playlistId: playlists[0].id });
-    console.log(videos);
-  }
+    const playlistData = retrievePlaylistData(playlists[0]);
+    const videos = await youtubeAPI.getVideosFromPlaylist({ auth, playlistId: playlistData.id });
 
-    notionAPI.createNewPlaylist();
+    notionAPI.createNewToDoPlaylist({
+      playlistData,
+      videos: mappedVideos(videos),
+    });
+  }
 
 })();
