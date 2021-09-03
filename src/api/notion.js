@@ -4,7 +4,7 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 class NotionAPI {
 
-  async createNewPlaylist() {
+  async createNewToDoPlaylist({ playlistData, videos }) {
     const { id } = await notion.pages.create({
       parent: {
         database_id: process.env.NOTION_DATABASE
@@ -15,7 +15,7 @@ class NotionAPI {
           title: [
             {
               text: {
-                content: 'API Test Started'
+                content: `${playlistData.channelTitle} - ${playlistData.playlistTitle}`
               }
             }
           ]
@@ -23,22 +23,23 @@ class NotionAPI {
       }
     });
 
+    const notionToDoVideos = videos.map(video => {
+      return {
+        type: 'to_do',
+        to_do: {
+          text: [
+            {
+              text: { content: `${video.position + 1} - ${video.videoTitle}` },
+            }
+          ],
+          checked: false,
+        }
+      };
+    })
+
     await notion.blocks.children.append({
       block_id: id,
-      children: [
-        {
-          type: 'to_do',
-          to_do: {
-            text: [
-              {
-                text: { content: '1 - TODO Test' },
-              }
-            ],
-            checked: false,
-            children: []
-          }
-        }
-      ]
+      children: notionToDoVideos
     });
   }
 
