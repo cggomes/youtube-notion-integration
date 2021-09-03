@@ -6,9 +6,11 @@ const retrieveDataFromUser = require('./utils/userInputUtil');
 const YoutubeAuth = require('./auth/youtubeAuth');
 const FileUtil = require('./utils/fileUtil');
 const YouTubeAPI = require('./api/youtube');
+const NotionAPI = require('./api/notion');
 
 const youtubeAuth = new YoutubeAuth({ google });
 const youtubeAPI = new YouTubeAPI({ google });
+const notionAPI = new NotionAPI();
 
 (async () => {
   const clientSecret = await FileUtil.readFile('client_secret.json');
@@ -28,5 +30,7 @@ const youtubeAPI = new YouTubeAPI({ google });
     const videos = await youtubeAPI.getVideosFromPlaylist({ auth, playlistId: playlists[0].id });
     console.log(videos);
   }
+
+    notionAPI.createNewPlaylist();
 
 })();
