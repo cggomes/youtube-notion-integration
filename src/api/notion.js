@@ -39,7 +39,15 @@ class NotionAPI {
 
     await notion.blocks.children.append({
       block_id: id,
-      children: notionToDoVideos
+      children: [
+        {
+          type: 'bookmark',
+          bookmark: {
+            url: `https://www.youtube.com/playlist?list=${playlistData.id}`,
+          }
+        },
+        ...notionToDoVideos
+      ]
     });
   }
 

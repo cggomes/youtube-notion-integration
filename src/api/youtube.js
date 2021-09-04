@@ -25,7 +25,7 @@ class YouTubeAPI {
       service.playlists.list({
         channelId,
         auth,
-        part: 'contentDetails,snippet'
+        part: 'snippet'
       }, (err, response) => 
         err ? reject('The API returned an error: ' + err) : resolve(response.data.items)
       );
