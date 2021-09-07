@@ -10,19 +10,21 @@ const notionAPI = new NotionAPI();
 
 (async () => {
   const channelId = await retrieveDataFromUser('Enter the channel id: ');
-  const channels = await youtubeAPI.getChannels({ channelId });
-  const playlists = await youtubeAPI.getPlaylists({ channelId: channels[0].id });
+  const channel = await youtubeAPI.getChannel({ channelId });
 
-  if (playlists) {
-    const playlistData = retrievePlaylistData(playlists[0]);
-    const videos = await youtubeAPI.getVideosFromPlaylist({ playlistId: playlistData.id });
-
-    await notionAPI.createNewToDoPlaylist({
-      playlistData,
-      videos: mappedVideos(videos),
-    });
-
-    console.log('Playlist sucessfully added!');
+  if (channel) {
+    const playlists = await youtubeAPI.getPlaylists({ channelId: channel.id });
+  
+    if (playlists) {
+      const playlistData = retrievePlaylistData(playlists[0]);
+      const videos = await youtubeAPI.getVideosFromPlaylist({ playlistId: playlistData.id });
+  
+      await notionAPI.createNewToDoPlaylist({
+        playlistData,
+        videos: mappedVideos(videos),
+      });
+  
+      console.log('Playlist sucessfully added!');
+    }
   }
-
 })();

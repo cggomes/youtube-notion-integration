@@ -7,13 +7,13 @@ const youtube = google.youtube({
 
 class YouTubeAPI {
 
-  getChannels({ channelId }) {
+  getChannel({ channelId }) {
     return new Promise((resolve, reject) => {  
       youtube.channels.list({
         part: 'snippet',
         id: channelId,
       }, (err, response) => 
-        err ? reject('The API returned an error: ' + err) : resolve(response.data.items)
+        err ? reject('The API returned an error: ' + err) : resolve(response.data.items ? response.data.items[0] : null)
       );
     });
   }
