@@ -18,10 +18,11 @@ class YouTubeAPI {
     });
   }
 
-  getPlaylists({ channelId }) {
+  getPlaylists({ channelId, id }) {
     return new Promise((resolve, reject) => {  
       youtube.playlists.list({
         channelId,
+        id,
         part: 'snippet'
       }, (err, response) => 
         err ? reject('The API returned an error: ' + err) : resolve(response.data.items)
