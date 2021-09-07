@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "npx jest --watchAll",
+    "test:cov": "npx jest --coverage"
   },
   "keywords": [
     "youtube",
@@ -19,5 +21,8 @@
     "express": "^4.17.1",
     "google-auth-library": "^7.6.2",
     "googleapis": "^84.0.0"
+  },
+  "devDependencies": {
+    "jest": "^27.1.0"
   }
 }
