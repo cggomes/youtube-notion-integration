@@ -29,6 +29,10 @@ module.exports = {
     "node_modules"
   ],
   collectCoverageFrom: [
-    "src/**/*.js"
+    "src/**/*.js",
+    "!src/index.js",
+    "!src/youtube/**/*.js",
+    "!src/notion/**/*.js",
+    "!src/routes/**/*.js",
   ]
 };
