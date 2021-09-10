@@ -3,16 +3,18 @@ const { retrievePlaylistData, mappedVideos } = require('../youtube/utils');
 const NotionAPI = require('../notion/notion');
 const YouTubeAPI = require('../youtube/youtube');
 
-const youtubeAPI = new YouTubeAPI();
-const notionAPI = new NotionAPI();
-
 class PlaylistService {
 
+  constructor() {
+    this.youtubeAPI = new YouTubeAPI();
+    this.notionAPI = new NotionAPI();
+  }
+
   async getPlaylistsByChannelId(channelId) {
-    const channel = await youtubeAPI.getChannel({ channelId });
+    const channel = await this.youtubeAPI.getChannel({ channelId });
     
     if (channel) {
-      const playlists = await youtubeAPI.getPlaylists({ channelId: channel.id });
+      const playlists = await this.youtubeAPI.getPlaylists({ channelId: channel.id });
   
       if (playlists) {
         const mappedPlaylists = playlists.map(playlist => retrievePlaylistData(playlist));
@@ -26,11 +28,11 @@ class PlaylistService {
   }
 
   async createNotionPlaylist(playlistId) {
-    const videos = await youtubeAPI.getVideosFromPlaylist({ playlistId });
-    const playlist = await youtubeAPI.getPlaylists({ id: playlistId });
+    const videos = await this.youtubeAPI.getVideosFromPlaylist({ playlistId });
+    const playlist = await this.youtubeAPI.getPlaylists({ id: playlistId });
     const playlistData = retrievePlaylistData(playlist[0]);
   
-    await notionAPI.createNewToDoPlaylist({
+    await this.notionAPI.createNewToDoPlaylist({
       playlistData,
       videos: mappedVideos(videos),
     });
