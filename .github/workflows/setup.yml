@@ -1,4 +1,4 @@
-name: Setup CI
+name: CI Server
 
 on: [push]
 
@@ -6,6 +6,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
 
     strategy:
       matrix:
@@ -18,5 +21,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: server/package-lock.json
+      
     - run: npm ci
     - run: npm test
