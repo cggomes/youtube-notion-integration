@@ -13,4 +13,8 @@ function watchTask() {
   watch(['public/sass/**/*.scss', '*.html'], buildStyles);
 }
 
-exports.default = series(buildStyles, watchTask);
+if (process.env.NODE_ENV === 'development') {
+  exports.default = series(buildStyles, watchTask);
+} else {
+  exports.default = series(buildStyles);
+}
