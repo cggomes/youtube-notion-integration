@@ -1,0 +1,23 @@
+{
+  "name": "youtube-notion-integration-app",
+  "version": "0.0.1",
+  "description": "An application for retrieve a playlist from YouTube and create a TODO list on Notion for each video.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristianGustavo/youtube-notion-integration.git"
+  },
+  "keywords": [
+    "youtube",
+    "notion"
+  ],
+  "author": "Christian Gustavo Ribeiro Gomes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristianGustavo/youtube-notion-integration/issues"
+  },
+  "homepage": "https://github.com/ChristianGustavo/youtube-notion-integration#readme"
+}
