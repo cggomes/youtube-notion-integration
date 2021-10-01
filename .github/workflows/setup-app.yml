@@ -25,10 +25,8 @@ jobs:
         cache: 'npm'
         cache-dependency-path: app/package-lock.json
 
-    - name: Build
-      run: |
-        npm install
-        npx gulp
+    - run: npm ci
+    - run: npx gulp
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@4.1.5
