@@ -25,7 +25,6 @@ jobs:
         cache: 'npm'
         cache-dependency-path: app/package-lock.json
 
-    - name: Build
     - run: npm ci
     - run: npx gulp
 
