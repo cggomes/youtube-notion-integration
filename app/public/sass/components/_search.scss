@@ -1,12 +1,14 @@
 .search {
-  // height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   padding: 0 16px;
   margin: auto;
-  height: 90%;
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+
 
   &__input {
     position: relative;
@@ -16,9 +18,15 @@
     input {
       padding-left: 18px;
       width: 100%;
+      max-width: 820px;
       height: 56px;
       border: 1px solid rgba(0, 0, 0, 0.2);
       border-radius: 5px;
+      outline: none;
+    }
+
+    input:focus {
+      border: 1px solid rgba(0, 0, 0, 0.3)
     }
 
     button {
@@ -43,8 +51,13 @@
     border-radius: 5px;
     margin-top: 32px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
     width: 156px;
+  }
+
+  &__btn:active {
+    transform: scale(0.9);
   }
 
   &__img {
@@ -52,7 +65,7 @@
     max-width: 335px;
   }
 
-  @media (min-width: 768px) {
+  @include md {
     &__input {
       width: 700px;
     }
