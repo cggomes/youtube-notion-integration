@@ -9,9 +9,8 @@ html {
 
 body {
   min-height: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -25,6 +24,9 @@ body {
   align-self: center;
   justify-self: center;
   width: 100%;
+}
+.search .github-description__logo {
+  display: none;
 }
 .search__input {
   position: relative;
@@ -82,24 +84,55 @@ body {
     width: 100%;
   }
 }
+.search.result-list {
+  margin: 6px 17px 0px 17px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.search.result-list .github-description__logo {
+  display: block;
+  width: 30px;
+  height: 30px;
+  justify-self: end;
+}
+.search.result-list .search__img {
+  width: 70px;
+  height: 29px;
+}
+.search.result-list .search__input {
+  margin-top: 24px;
+  width: 100%;
+  grid-column: 1/3;
+  box-shadow: 10px 10px 30px rgba(255, 203, 71, 0.06);
+}
+.search.result-list .search__btn {
+  display: none;
+}
 
 .footer {
-  justify-self: center;
+  align-self: center;
   margin-bottom: 30px;
 }
 .footer * {
   display: block;
 }
+.footer.result-list {
+  display: none;
+}
 
 .github-description {
   justify-self: flex-end;
   padding-right: 15px;
+  align-self: end;
 }
 .github-description__card--title {
   display: none;
 }
 .github-description__logo {
   cursor: pointer;
+}
+.github-description.result-list {
+  display: none;
 }
 @media screen and (min-width: 1200px) {
   .github-description {
@@ -130,4 +163,73 @@ body {
     align-self: end;
     justify-self: end;
   }
+}
+
+.search-result {
+  display: none;
+}
+.search-result hr {
+  margin: 9px 16px 0px 16px;
+  background-color: #C4C4C4;
+  opacity: 0.2;
+}
+.search-result__title {
+  font-weight: 400;
+  margin-top: 16px;
+  margin-left: 16px;
+}
+.search-result__title--secondary {
+  font-size: 14px;
+  opacity: 0.5;
+}
+.search-result__title--secondary--lg {
+  font-size: 16px;
+  margin-top: 9px;
+}
+.search-result__title--primary {
+  font-size: 16px;
+}
+
+.search-result.result-list {
+  display: block;
+}
+
+.playlists {
+  margin: 16px;
+  list-style-type: none;
+  list-style: none;
+  padding: 0;
+}
+.playlists .card {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  padding: 17px 2px 6px 0px;
+  border-radius: 6px;
+  box-shadow: 9px 12px 44px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  text-decoration: none;
+  color: #202020;
+}
+.playlists .card__img {
+  width: 132px;
+  height: 106px;
+  grid-row: 1/3;
+  border-radius: 6px;
+}
+.playlists .card__details {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin-bottom: 14px;
+  margin-left: 11px;
+}
+.playlists .card__details span {
+  opacity: 0.5;
+}
+.playlists .card__title {
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  margin-left: 11px;
 }

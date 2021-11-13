@@ -12,26 +12,43 @@
   </head>
   <body>
 
-    <main class="search">
+    <section class="search">
       <img class="search__img" src="img/logo.svg" alt="NTube logo">
+
+      <img id="github-logo" class="github-description__logo" src="img/github-logo.png" alt="github logo">
       
       <div class="search__input">
-        <input type="text" name="search" id="search" placeholder="Pesquisar" />
-        <button type="button" aria-label="search" name="search">
+        <input type="text" name="search" id="searchInput" placeholder="Pesquisar" />
+        <button id="search_icon" type="button" aria-label="search" name="search">
           <img src="img/search.svg" alt="search image" />
         </button>
       </div>
 
-      <button class="search__btn">Pesquisar</button>
+      <button id="search" class="search__btn">Pesquisar</button>
+    </section>
+
+    <main class="search-result">
+      <h2 class="search-result__title search-result__title--secondary">
+        Resultados da pesquisa 
+      </h2>
+      
+      <h3 class="search-result__title search-result__title--primary">
+        Canal 123 
+      </h3>
+
+      <hr />
+      
+      <h4 class="search-result__title search-result__title--secondary search-result__title--secondary--lg">
+        <img src="img/ondemand_video.svg" alt="Logo of OnDemand Video">
+        Vídeos 
+      </h4>
+
+      <ul class="playlists"></ul>
     </main>
 
     <section class="github-description">
-      <div class="github-description__card">
         <span class="github-description__card--title">Olá, se você quiser utilizar essa aplicação no seu notion, fique a vontade para usar o código que se encontra disponível no Github. Colaborações no projeto também são bem vindas. ;)</span>
         <img class="github-description__logo" src="img/github-logo.png" alt="github logo">
-      </div>
-
-      <!-- <img class="github-description__logo" src="img/github-logo.png" alt="github logo"> -->
     </section>
 
     <footer class="footer">
@@ -39,5 +56,6 @@
       <span>UXD. by Pâmela</span>
     </footer>
 
+    <script src="js/index.js"></script>
   </body>
 </html>
