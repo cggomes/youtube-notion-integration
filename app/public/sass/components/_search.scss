@@ -9,6 +9,9 @@
   justify-self: center;
   width: 100%;
 
+  .github-description__logo {
+    display: none;
+  }
 
   &__input {
     position: relative;
@@ -72,6 +75,38 @@
 
     &__img {
       width: 100%;
+    }
+  }
+
+  &.result-list {
+    margin: 6px 17px 0px 17px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  
+    .github-description__logo {
+      display: block;
+      width: 30px;
+      height: 30px;
+      justify-self: end;
+    }
+
+    .search {
+      &__img {
+        width: 70px;
+        height: 29px;
+      }
+
+      &__input {
+        margin-top: 24px;
+        width: 100%;
+        grid-column: 1 / 3;
+        box-shadow: 10px 10px 30px rgba(255, 203, 71, 0.06);
+      }
+
+      &__btn {
+        display: none;
+      }
+
     }
   }
 }

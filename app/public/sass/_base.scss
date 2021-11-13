@@ -9,8 +9,7 @@ html {
 
 body {
   min-height: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   font-family: 'Montserrat', sans-serif;
 }
