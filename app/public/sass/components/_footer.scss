@@ -1,8 +1,12 @@
 .footer {
-  justify-self: center;
+  align-self: center;
   margin-bottom: 30px;
 
   * {
     display: block;
+  }
+
+  &.result-list {
+    display: none;
   }
 }
