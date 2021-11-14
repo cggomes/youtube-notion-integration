@@ -7,7 +7,10 @@ describe('#PlaylistService', () => {
     id: '123',
     snippet: {
       title: 'Test',
-      channelTitle: 'Test Title Channel'
+      channelTitle: 'Test Title Channel',
+      thumbnails: {
+        high: 'url-to-playlist-thumbnail'
+      }
     },
   };
 
