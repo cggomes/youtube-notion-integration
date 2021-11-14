@@ -209,6 +209,7 @@ body {
   font-size: 14px;
   text-decoration: none;
   color: #202020;
+  margin-bottom: 16px;
 }
 .playlists .card__img {
   width: 132px;

@@ -3,6 +3,8 @@ module.exports.retrievePlaylistData = (playlist) => {
     id: playlist.id,
     playlistTitle: playlist.snippet.title,
     channelTitle: playlist.snippet.channelTitle,
+    publishedAt: playlist.snippet.publishedAt,
+    thumbnailSrc: playlist.snippet.thumbnails.high.url,
   };
 };
 
