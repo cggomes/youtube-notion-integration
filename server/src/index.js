@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 80;
 
 app.use(cors({
-  origin: [ 'http://127.0.0.1:5500', 'https://youtube-notion.herokuapp.com/' ]
+  origin: [ 'http://127.0.0.1:5500', 'https://youtube-notion.herokuapp.com/', 'https://christiangustavo.github.io' ]
 }))
 
 const PlaylistRoutes = require('./routes/playlist.routes');
