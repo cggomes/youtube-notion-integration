@@ -10,15 +10,19 @@ class PlaylistService {
     this.notionAPI = new NotionAPI();
   }
 
-  async getPlaylistsByChannelId(channelId) {
+  async getPlaylistsByChannelId(channelId, pageToken) {
     const channel = await this.youtubeAPI.getChannel({ channelId });
     
     if (channel) {
-      const playlists = await this.youtubeAPI.getPlaylists({ channelId: channel.id });
+      const { items, nextPageToken, pageInfo } = await this.youtubeAPI.getPlaylists({ channelId: channel.id, pageToken });
   
-      if (playlists) {
-        const mappedPlaylists = playlists.map(playlist => retrievePlaylistData(playlist));
-        return mappedPlaylists;
+      if (items) {
+        const mappedItems = items.map(data => retrievePlaylistData(data));
+        return {
+          items: mappedItems,
+          nextPageToken,
+          pageInfo,
+        };
       } else {
         throw new Error('This channel doesn\'t have playlists.');
       }

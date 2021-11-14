@@ -5,7 +5,8 @@ class PlaylistController {
   async getPlaylistsByChannelId(req, res) {
     try {
       const channelId = req.params.id;
-      const playlists = await PlaylistService.getPlaylistsByChannelId(channelId);
+      const { nextPageToken } = req.query;
+      const playlists = await PlaylistService.getPlaylistsByChannelId(channelId, nextPageToken);
 
       res.status(200).json(playlists);
     } catch (error) {
