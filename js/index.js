@@ -2,6 +2,7 @@ const searchBtn = document.getElementById('search');
 const input = document.getElementById('searchInput');
 const playlistsElement = document.querySelector('.playlists');
 const searchIcon = document.querySelector('#search_icon');
+const channelTitleElement = document.querySelector('#channelTitle');
 
 function verifyLayout() {
   if (window.location.search) {
@@ -37,12 +38,16 @@ function loadEventListenersPlaylistItem() {
   const playlistItems = document.querySelectorAll('li[class="item"]');
 
   playlistItems.forEach(item => {
-    item.addEventListener('click', e => console.log(e));
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      console.log(e);
+    });
   });
 }
 
 function loadPlaylists() {
-  fetch(`http://localhost/playlists/channel/${input.value}`)
+  fetch(`https://youtube-notion.herokuapp.com/playlists/channel/${input.value}`)
+  // fetch(`http://localhost/playlists/channel/${input.value}`)
     .then(res => res.json())
     .then(res => this.renderListItems(res))
     .then(() => loadEventListenersPlaylistItem());
@@ -56,11 +61,11 @@ function changeLayout() {
 }
 
 // TODO: missing uploadTime and imageSrc
-const cardTemplate = ({ id, playlistTitle, channelTitle, uploadTime, imageSrc }) => (
+const cardTemplate = ({ id, playlistTitle, channelTitle, publishedAt, thumbnailSrc }) => (
   `
     <li class="item">
-      <a class="card" data-id="${id}">
-        <img class="card__img" src="${imageSrc}" alt="Playlist thumbnail">
+      <a href="#" class="card" data-id="${id}">
+        <img class="card__img" src="${thumbnailSrc}" alt="Playlist thumbnail">
 
         <h1 class="card__title">${playlistTitle}</h1>
 
@@ -69,7 +74,7 @@ const cardTemplate = ({ id, playlistTitle, channelTitle, uploadTime, imageSrc })
             Youtube * 
             <span>${channelTitle}</span> <br />
           </p>
-          <span>${uploadTime}</span>
+          <span>${publishedAt}</span>
         </div>
       </a>
     </li>
@@ -83,6 +88,7 @@ function createListItems(playlists) {
 function renderListItems(playlists) {
   const playlistsTemplate = createListItems(playlists);
   playlistsElement.innerHTML = playlistsTemplate;
+  channelTitleElement.textContent = playlists[0].channelTitle;
 }
 
 verifyLayout();
