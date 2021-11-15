@@ -16,12 +16,17 @@ class PlaylistController {
   }
 
   async createNotionPlaylist(req, res) {
-    const playlistId = req.params.id;
-    await PlaylistService.createNotionPlaylist(playlistId);
-
-    res.status(201).send();
+    try {
+      const playlistId = req.body.id;
+      await PlaylistService.createNotionPlaylist(playlistId);
+    
+      res.status(201).send();
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error?.message });
+    }
   }
-
+  
 }
 
 module.exports = new PlaylistController();

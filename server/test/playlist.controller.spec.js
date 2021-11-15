@@ -8,7 +8,10 @@ describe('#PlaylistController', () => {
     params: {
       id: '1'
     },
-    query: {}
+    query: {},
+    body: {
+      id: '1'
+    }
   };
 
   const jsonFn = jest.fn();
