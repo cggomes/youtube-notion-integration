@@ -33,8 +33,8 @@ class PlaylistService {
 
   async createNotionPlaylist(playlistId) {
     const videos = await this.youtubeAPI.getVideosFromPlaylist({ playlistId });
-    const playlist = await this.youtubeAPI.getPlaylists({ id: playlistId });
-    const playlistData = retrievePlaylistData(playlist[0]);
+    const { items: [ playlist ] } = await this.youtubeAPI.getPlaylists({ id: playlistId });
+    const playlistData = retrievePlaylistData(playlist);
   
     await this.notionAPI.createNewToDoPlaylist({
       playlistData,

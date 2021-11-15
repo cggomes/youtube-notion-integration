@@ -10,6 +10,7 @@ class PlaylistController {
 
       res.status(200).json(playlists);
     } catch (error) {
+      console.error(error);
       res.status(400).json({ message: error.message });
     }
   }
