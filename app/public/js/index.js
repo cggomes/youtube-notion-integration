@@ -3,9 +3,16 @@ const input = document.getElementById('searchInput');
 const playlistsElement = document.querySelector('.playlists');
 const searchIcon = document.querySelector('#search_icon');
 const channelTitleElement = document.querySelector('#channelTitle');
+const addBtn = document.querySelector('#add');
+const cancelBtn = document.querySelector('#cancel');
+const modal = document.querySelector('.modal');
+
+// const API_URL = `http://localhost/playlists`;
+const API_URL = 'https://youtube-notion.herokuapp.com/playlists';
 
 let token = null;
 let pageInformation = null;
+let selectedPlaylistId = null;
 
 let options = {
   rootMargin: '0px',
@@ -36,6 +43,12 @@ function fillSearchInput() {
 
 searchIcon.addEventListener('click', () => handleClick());
 searchBtn.addEventListener('click', () => handleClick());
+addBtn.addEventListener('click', () => handleAddPlaylist());
+
+cancelBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  selectedPlaylistId = null;
+});
 
 function handleClick() {
   if (input.value) {
@@ -44,6 +57,23 @@ function handleClick() {
     changeLayout();
   }
 };
+
+function handleAddPlaylist() {
+  if (selectedPlaylistId) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+
+    fetch(`${API_URL}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        id: selectedPlaylistId,
+      }),
+      headers
+    })
+    .then(() => {
+      modal.style.display = 'none';
+    });
+  }
+}
 
 function changeUrlHistory() {
   const url = new URL(window.location);
@@ -61,7 +91,8 @@ function loadEventListenersPlaylistItem() {
   playlistItems.forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
-      console.log(e);
+      selectedPlaylistId = e.target.getAttribute('data-id');
+      modal.style.display = 'block';
     });
   });
 }
@@ -76,8 +107,7 @@ function hasNextPage() {
 }
 
 function retrievePlaylists() {
-  // let url = `http://localhost/playlists/channel/${input.value}`;
-  let url = `https://youtube-notion.herokuapp.com/playlists/channel/${input.value}`;
+  let url = `${API_URL}/channel/${input.value}`;
 
   if (hasNextPage()) {
     url += `?nextPageToken=${token}`;
@@ -103,18 +133,18 @@ function changeLayout() {
 
 const cardTemplate = ({ id, playlistTitle, channelTitle, publishedAt, thumbnailSrc }) => (
   `
-    <li class="item">
+    <li data-id="${id}" class="item">
       <a href="#" class="card" data-id="${id}">
-        <img class="card__img" src="${thumbnailSrc}" alt="Playlist thumbnail">
+        <img data-id="${id}" class="card__img" src="${thumbnailSrc}" alt="Playlist thumbnail">
 
-        <h1 class="card__title">${playlistTitle}</h1>
+        <h1 data-id="${id}" class="card__title">${playlistTitle}</h1>
 
-        <div class="card__details">
-          <p>
+        <div data-id="${id}" class="card__details">
+          <p data-id="${id}">
             Youtube • 
-            <span>${channelTitle}</span> <br />
+            <span data-id="${id}">${channelTitle}</span> <br />
           </p>
-          <span>${publishedAt}</span>
+          <span data-id="${id}">${publishedAt}</span>
         </div>
       </a>
     </li>
