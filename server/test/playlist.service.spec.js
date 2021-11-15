@@ -4,30 +4,37 @@ const PlaylistService = require('../src/services/playlist.service');
 
 describe('#PlaylistService', () => {
   const playlistDetails = {
-    id: '123',
-    snippet: {
-      title: 'Test',
-      channelTitle: 'Test Title Channel',
-      thumbnails: {
-        high: 'url-to-playlist-thumbnail'
-      }
-    },
+    items: [{
+      id: '123',
+      snippet: {
+        channelTitle: 'Test Title Channel',
+        title: 'Test',
+        thumbnails: {
+          high: {
+            url: 'url'
+          }
+        }
+      },
+    }],
+    nextPageToken: 'ABC123',
+    pageInfo: {}
   };
 
   describe('#getPlaylistsByChannelId', () => {
     test('should return a playlist by channel id', async () => {
       const channelId = '123';
+      const pageToken = 'ABC123';
   
       jest.spyOn(PlaylistService.youtubeAPI, PlaylistService.youtubeAPI.getChannel.name)
         .mockResolvedValue({ id: 123 });
       jest.spyOn(PlaylistService.youtubeAPI, PlaylistService.youtubeAPI.getPlaylists.name)
-        .mockResolvedValue([ { ...playlistDetails } ]);
+        .mockResolvedValue({ ...playlistDetails });
   
-      const playlists = await PlaylistService.getPlaylistsByChannelId(channelId);
+      const playlists = await PlaylistService.getPlaylistsByChannelId(channelId, pageToken);
   
-      expect(playlists.length).toBe(1);
-  
-      const playlist = playlists[0];
+      expect(playlists.items.length).toBe(1);
+
+      const playlist = playlists.items[0];
   
       expect(playlist.id).toBe('123');
       expect(playlist.channelTitle).toBe('Test Title Channel');
@@ -49,7 +56,7 @@ describe('#PlaylistService', () => {
       jest.spyOn(PlaylistService.youtubeAPI, PlaylistService.youtubeAPI.getChannel.name)
         .mockResolvedValue({ id: 123 });
       jest.spyOn(PlaylistService.youtubeAPI, PlaylistService.youtubeAPI.getPlaylists.name)
-        .mockResolvedValue(null);
+        .mockResolvedValue({});
   
       await expect(PlaylistService.getPlaylistsByChannelId(channelId)).rejects.toThrowError('This channel doesn\'t have playlists.');
     });
@@ -61,7 +68,7 @@ describe('#PlaylistService', () => {
         .mockResolvedValue([{ snippet: { title: 'Title', position: 'Pos' } }]);
 
       jest.spyOn(PlaylistService.youtubeAPI, PlaylistService.youtubeAPI.getPlaylists.name)
-        .mockResolvedValue([ { ...playlistDetails } ]);
+        .mockResolvedValue({ ...playlistDetails });
 
       jest.spyOn(PlaylistService.notionAPI, PlaylistService.notionAPI.createNewToDoPlaylist.name).mockResolvedValue();
 
@@ -72,7 +79,9 @@ describe('#PlaylistService', () => {
           playlistData: {
             id: '123',
             playlistTitle: 'Test',
-            channelTitle: 'Test Title Channel'
+            channelTitle: 'Test Title Channel',
+            publishedAt: undefined,
+            thumbnailSrc: 'url',
           },
           videos: [
             { videoTitle: 'Title', position: 'Pos' }

@@ -4,11 +4,28 @@ const playlistsElement = document.querySelector('.playlists');
 const searchIcon = document.querySelector('#search_icon');
 const channelTitleElement = document.querySelector('#channelTitle');
 
+let token = null;
+let pageInformation = null;
+
+let options = {
+  rootMargin: '0px',
+  threshold: 1.0
+};
+
+let observer = new IntersectionObserver(([ entry ]) => {
+  if (entry.isIntersecting && hasNextPage()) {
+    retrievePlaylists();
+  }
+}, options);
+
+observer.observe(document.getElementById('the-end'));
+
+
 function verifyLayout() {
   if (window.location.search) {
     changeLayout();
     fillSearchInput();
-    loadPlaylists();
+    retrievePlaylists();
   }
 }
 
@@ -23,7 +40,7 @@ searchBtn.addEventListener('click', () => handleClick());
 function handleClick() {
   if (input.value) {
     changeUrlHistory();
-    loadPlaylists();
+    retrievePlaylists();
     changeLayout();
   }
 };
@@ -34,8 +51,12 @@ function changeUrlHistory() {
   history.pushState({}, '', url);
 }
 
+function retrieveAllItemsFromHtml() {
+  return document.querySelectorAll('li[class="item"]');
+}
+
 function loadEventListenersPlaylistItem() {
-  const playlistItems = document.querySelectorAll('li[class="item"]');
+  const playlistItems = retrieveAllItemsFromHtml();
 
   playlistItems.forEach(item => {
     item.addEventListener('click', e => {
@@ -45,12 +66,32 @@ function loadEventListenersPlaylistItem() {
   });
 }
 
-function loadPlaylists() {
-  fetch(`https://youtube-notion.herokuapp.com/playlists/channel/${input.value}`)
-  // fetch(`http://localhost/playlists/channel/${input.value}`)
+function storeTokenAndPage({ nextPageToken, pageInfo }) {
+  token = nextPageToken;
+  pageInformation = pageInfo;
+}
+
+function hasNextPage() {
+  return pageInformation && token && retrieveAllItemsFromHtml().length < pageInformation.totalResults;
+}
+
+function retrievePlaylists() {
+  // let url = `http://localhost/playlists/channel/${input.value}`;
+  let url = `https://youtube-notion.herokuapp.com/playlists/channel/${input.value}`;
+
+  if (hasNextPage()) {
+    url += `?nextPageToken=${token}`;
+  }
+
+  fetch(url)
     .then(res => res.json())
-    .then(res => this.renderListItems(res))
-    .then(() => loadEventListenersPlaylistItem());
+    .then(res => {
+      storeTokenAndPage(res);
+      return res;
+    })
+    .then(res => renderListItems(res))
+    .then(() => loadEventListenersPlaylistItem())
+    ;
 }
 
 function changeLayout() {
@@ -60,7 +101,6 @@ function changeLayout() {
   document.querySelector('.search-result').classList.add('result-list');
 }
 
-// TODO: missing uploadTime and imageSrc
 const cardTemplate = ({ id, playlistTitle, channelTitle, publishedAt, thumbnailSrc }) => (
   `
     <li class="item">
@@ -71,7 +111,7 @@ const cardTemplate = ({ id, playlistTitle, channelTitle, publishedAt, thumbnailS
 
         <div class="card__details">
           <p>
-            Youtube * 
+            Youtube • 
             <span>${channelTitle}</span> <br />
           </p>
           <span>${publishedAt}</span>
@@ -85,10 +125,10 @@ function createListItems(playlists) {
   return playlists.map(playlist => cardTemplate(playlist)).join('');
 }
 
-function renderListItems(playlists) {
-  const playlistsTemplate = createListItems(playlists);
-  playlistsElement.innerHTML = playlistsTemplate;
-  channelTitleElement.textContent = playlists[0].channelTitle;
+function renderListItems({ items }) {
+  const playlistsTemplate = createListItems(items);
+  playlistsElement.innerHTML += playlistsTemplate;
+  channelTitleElement.textContent = items[0].channelTitle;
 }
 
 verifyLayout();

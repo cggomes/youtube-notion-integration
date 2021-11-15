@@ -18,14 +18,16 @@ class YouTubeAPI {
     });
   }
 
-  getPlaylists({ channelId, id }) {
+  getPlaylists({ channelId, id, pageToken = null }) {
     return new Promise((resolve, reject) => {  
       youtube.playlists.list({
         channelId,
         id,
-        part: 'snippet'
-      }, (err, response) => 
-        err ? reject('The API returned an error: ' + err) : resolve(response.data.items)
+        part: 'snippet',
+        maxResults: 20,
+        pageToken,
+      }, (err, { data: { nextPageToken, items, pageInfo } }) => 
+        err ? reject('The API returned an error: ' + err) : resolve({ items, nextPageToken, pageInfo })
       );
     });
   }
