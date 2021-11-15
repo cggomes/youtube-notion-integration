@@ -32,7 +32,7 @@ class PlaylistService {
   }
 
   async createNotionPlaylist(playlistId) {
-    const videos = await this.youtubeAPI.getVideosFromPlaylist({ playlistId });
+    const videos = await this.getAllVideosFromPlaylist(playlistId);
     const { items: [ playlist ] } = await this.youtubeAPI.getPlaylists({ id: playlistId });
     const playlistData = retrievePlaylistData(playlist);
   
@@ -40,6 +40,19 @@ class PlaylistService {
       playlistData,
       videos: mappedVideos(videos),
     });
+  }
+
+  async getAllVideosFromPlaylist(playlistId) {
+    let videos = [];
+    let playlistSize = 0;
+
+    do {
+      const { items, totalResults } = await this.youtubeAPI.getVideosFromPlaylist({ playlistId });
+      playlistSize = totalResults;
+      videos = [...videos, ...items]
+    } while (videos.length < playlistSize);
+
+    return videos;
   }
 
 }

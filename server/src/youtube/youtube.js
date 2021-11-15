@@ -36,9 +36,10 @@ class YouTubeAPI {
     return new Promise((resolve, reject) => {
       youtube.playlistItems.list({
         playlistId,
-        part: 'snippet'
-      }, (err, response) => 
-        err ? reject('The API returned an error: ' + err) : resolve(response.data.items)
+        part: 'snippet',
+        maxResults: 50,
+      }, (err, { data: { items, pageInfo: { totalResults } } }) => 
+        err ? reject('The API returned an error: ' + err) : resolve({ items, totalResults })
       );
     });
   }

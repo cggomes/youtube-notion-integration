@@ -8,7 +8,7 @@ class PlaylistRoutes {
 
   registerRoutes(app) {
     app.get('/playlists/channel/:id', playlistController.getPlaylistsByChannelId);
-    app.post('/create-page/playlist/:id', playlistController.createNotionPlaylist);
+    app.post('/playlists', playlistController.createNotionPlaylist);
   }
 
 }

@@ -65,7 +65,7 @@ describe('#PlaylistService', () => {
   describe('#createNotionPlaylist', () => {
     test('it should create a page in notion', async () => {
       jest.spyOn(PlaylistService.youtubeAPI, PlaylistService.youtubeAPI.getVideosFromPlaylist.name)
-        .mockResolvedValue([{ snippet: { title: 'Title', position: 'Pos' } }]);
+        .mockResolvedValue({ items: [{ snippet: { title: 'Title', position: 'Pos' } }], totalResults: 1 });
 
       jest.spyOn(PlaylistService.youtubeAPI, PlaylistService.youtubeAPI.getPlaylists.name)
         .mockResolvedValue({ ...playlistDetails });
