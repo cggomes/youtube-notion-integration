@@ -290,3 +290,45 @@ body {
   background: rgba(32, 32, 32, 0.2);
   font-weight: 400;
 }
+
+.snackbar {
+  position: fixed;
+  bottom: -70px;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: transform 0.2s ease-in;
+}
+.snackbar__wrapper {
+  background-color: #202020;
+  display: flex;
+  height: 78px;
+  padding: 18px;
+  align-items: center;
+}
+.snackbar__label {
+  color: #fff;
+  width: 70%;
+  font-size: 16px;
+  font-weight: 600;
+}
+.snackbar__actions {
+  flex: 1;
+  text-align: end;
+}
+.snackbar__action {
+  color: #D63333;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+.snackbar__action:active {
+  opacity: 0.5;
+}
+.snackbar--active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-70px);
+}
