@@ -5,9 +5,13 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 80;
 
-app.use(cors({
-  origin: [ 'http://127.0.0.1:5500', 'https://youtube-notion.herokuapp.com/', 'https://christiangustavo.github.io' ]
-}));
+const allowedUrls = JSON.parse(process.env.ALLOWED_URLS);
+
+if (!Array.isArray(allowedUrls)) {
+  throw Error('Allowed urls must be set as an array!');
+}
+
+app.use(cors({ origin: allowedUrls }));
 app.use(express.json());
 
 const PlaylistRoutes = require('./routes/playlist.routes');

@@ -26,6 +26,7 @@ Create a `.env` file in the root of the project and fill the following propertie
 NOTION_API_KEY={YOUR_NOTION_API_KEY}
 NOTION_DATABASE={YOUR_NOTION_API_DATABASE}
 YOUTUBE_API_KEY={YOUR_YOUTUBE_API_KEY}
+ALLOWED_URLS=["{YOUR_DOMAIN}", "https://christiangustavo.github.io"]
 ```
 
 To learn more about how to generate `NOTION_API_KEY` and `NOTION_DATABASE` check the API documentation from Notion:
