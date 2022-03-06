@@ -129,6 +129,7 @@ function changeLayout() {
   document.querySelector('.search').classList.add('result-list');
   document.querySelector('footer').classList.add('result-list');
   document.querySelector('.search-result').classList.add('result-list');
+  document.querySelector('.header').classList.add('result-list');
 }
 
 const cardTemplate = ({ id, playlistTitle, channelTitle, publishedAt, thumbnailSrc }) => (

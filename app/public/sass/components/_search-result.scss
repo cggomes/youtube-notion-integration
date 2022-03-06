@@ -26,6 +26,14 @@
             font-size: 16px;
         }
     }
+
+    @include md {
+        margin-left: 64px;
+    }
+
+    @include lg {
+        margin-left: 150px;
+    }
 }
 
 .search-result.result-list {
