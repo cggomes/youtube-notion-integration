@@ -15,6 +15,10 @@ body {
   overflow-x: hidden;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .search {
   display: flex;
   justify-content: center;
@@ -391,4 +395,23 @@ body {
   opacity: 1;
   visibility: visible;
   transform: translateY(-70px);
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #000;
+  border-radius: 50%;
+  animation: spin-loader 2s linear infinite;
+  margin: 16px auto;
+}
+
+@keyframes spin-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
