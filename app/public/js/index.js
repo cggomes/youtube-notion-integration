@@ -6,6 +6,8 @@ const channelTitleElement = document.querySelector('#channelTitle');
 const addBtn = document.querySelector('#add');
 const cancelBtn = document.querySelector('#cancel');
 const modal = document.querySelector('.modal');
+const snackbar = document.querySelector('#snackbar');
+const snackbarBackBtn = document.querySelector('#btn-snackbar-back');
 
 // const API_URL = `http://localhost/playlists`;
 const API_URL = 'https://youtube-notion.herokuapp.com/playlists';
@@ -44,6 +46,7 @@ function fillSearchInput() {
 searchIcon.addEventListener('click', () => handleClick());
 searchBtn.addEventListener('click', () => handleClick());
 addBtn.addEventListener('click', () => handleAddPlaylist());
+snackbarBackBtn.addEventListener('click', () => snackbar.classList.remove('snackbar--active'));
 
 cancelBtn.addEventListener('click', () => {
   modal.style.display = 'none';
@@ -71,6 +74,7 @@ function handleAddPlaylist() {
     })
     .then(() => {
       modal.style.display = 'none';
+      snackbar.classList.add('snackbar--active')
     });
   }
 }
