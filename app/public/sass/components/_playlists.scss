@@ -4,6 +4,10 @@
     list-style: none;
     padding: 0;
 
+    .item {
+      max-width: 750px;
+    }
+
     .card {
         display: grid;
         grid-template-columns: 132px 1fr;
@@ -13,6 +17,7 @@
         font-size: 14px;
         text-decoration: none;
         color: #202020;
+        margin: 0 0 16px 0;
         margin-bottom: 16px;
 
         &__img {
