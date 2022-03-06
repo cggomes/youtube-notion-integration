@@ -8,6 +8,7 @@ const cancelBtn = document.querySelector('#cancel');
 const modal = document.querySelector('.modal');
 const snackbar = document.querySelector('#snackbar');
 const snackbarBackBtn = document.querySelector('#btn-snackbar-back');
+const loader = document.querySelector('.loader');
 
 // const API_URL = `http://localhost/playlists`;
 const API_URL = 'https://youtube-notion.herokuapp.com/playlists';
@@ -15,6 +16,7 @@ const API_URL = 'https://youtube-notion.herokuapp.com/playlists';
 let token = null;
 let pageInformation = null;
 let selectedPlaylistId = null;
+let isAlreadyFetchingData = false;
 
 let options = {
   rootMargin: '0px',
@@ -22,7 +24,8 @@ let options = {
 };
 
 let observer = new IntersectionObserver(([ entry ]) => {
-  if (entry.isIntersecting && hasNextPage()) {
+  if (entry.isIntersecting && hasNextPage() && !isAlreadyFetchingData) {
+    isAlreadyFetchingData = true;
     retrievePlaylists();
   }
 }, options);
@@ -63,6 +66,11 @@ function handleClick() {
 
 function handleAddPlaylist() {
   if (selectedPlaylistId) {
+    const loader = createLoader();
+    const modalContent = document.querySelector('#modal-content');
+    modalContent.appendChild(loader);
+    hideModalContent();
+
     const headers = new Headers({ 'Content-Type': 'application/json' });
 
     fetch(`${API_URL}`, {
@@ -74,9 +82,32 @@ function handleAddPlaylist() {
     })
     .then(() => {
       modal.style.display = 'none';
-      snackbar.classList.add('snackbar--active')
+      modalContent.removeChild(loader);
+      showModalContent();
+      snackbar.classList.add('snackbar--active');
+
+      setTimeout(() => {
+        snackbar.classList.remove('snackbar--active');
+      }, 2000);
     });
   }
+}
+
+function hideModalContent() {
+  document.querySelector('#modal-footer').style.display = 'none';
+  document.querySelector('#modal-header').style.display = 'none';
+}
+
+function showModalContent() {
+  document.querySelector('#modal-footer').style.display = 'flex';
+  document.querySelector('#modal-header').style.display = 'block';
+}
+
+function createLoader() {
+  const loader = document.createElement('div');
+  loader.classList.add('loader');
+
+  return loader;
 }
 
 function changeUrlHistory() {
@@ -111,6 +142,7 @@ function hasNextPage() {
 }
 
 function retrievePlaylists() {
+  showLoader();
   let url = `${API_URL}/channel/${input.value}`;
 
   if (hasNextPage()) {
@@ -124,7 +156,9 @@ function retrievePlaylists() {
       return res;
     })
     .then(res => renderListItems(res))
+    .then(() => hideLoader())
     .then(() => loadEventListenersPlaylistItem())
+    .then(() => this.isAlreadyFetchingData = false)
     ;
 }
 
@@ -164,6 +198,14 @@ function renderListItems({ items }) {
   const playlistsTemplate = createListItems(items);
   playlistsElement.innerHTML += playlistsTemplate;
   channelTitleElement.textContent = items[0].channelTitle;
+}
+
+function showLoader() {
+  loader.style.display = 'block';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
 }
 
 verifyLayout();
