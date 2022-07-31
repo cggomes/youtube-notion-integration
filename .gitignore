@@ -4,3 +4,7 @@ client_secret.json
 .vscode/
 coverage/
 **/*/css/*
+
+# System files
+.DS_Store
+Thumbs.db
