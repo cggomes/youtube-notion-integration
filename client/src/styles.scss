@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@use './app/styles/variables' as *;
+
+:root {
+  --primary-color: #{$primary-color};
+  --primary-color-rgb: #{$primary-color-rgb};
+  --secondary-color: #{$secondary-color};
+  --secondary-color-rgb: #{$secondary-color-rgb};
+}
+
+body.dark {
+  --primary-color: #{$secondary-color};
+  --primary-color-rgb: #{$secondary-color-rgb};
+  --secondary-color: #{$primary-color};
+  --secondary-color-rgb: #{$primary-color-rgb};
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--secondary-color);
+  transition: background 2s;
+}
