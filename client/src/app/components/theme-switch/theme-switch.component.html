@@ -1,0 +1,21 @@
+
+<button
+  type="button"
+  class="theme-switch__btn"
+  (click)="switchTheme()"
+  role="switch"
+  [attr.aria-checked]="isDarkMode$ | async"
+  aria-label="toggle dark mode"
+>
+  <app-sun
+    @inOutAnimation
+    class="theme-switch__light"
+    *ngIf="!(isDarkMode$ | async)">
+  </app-sun>
+
+  <app-moon
+    @inOutAnimation
+    class="theme-switch__dark"
+    *ngIf="isDarkMode$ | async">
+  </app-moon>
+</button>
