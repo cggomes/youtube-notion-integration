@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -8,6 +9,7 @@ import { ThemeSwitchComponent } from './components/theme-switch/theme-switch.com
 import { MoonComponent } from './icons/moon/moon.component';
 import { SunComponent } from './icons/sun/sun.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { HeaderComponent } from './components/header/header.component';
     ThemeSwitchComponent,
     SunComponent,
     MoonComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

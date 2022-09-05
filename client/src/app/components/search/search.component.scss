@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.search {
+  border: 1px solid rgba(32, 32, 32, 0.1);
+  background-color: $secondary-color;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  border-radius: 5px;
+  box-shadow: 6px 6px 30px rgba(25, 94, 138, 0.25);
+  gap: 24px;
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    outline: none;
+  }
+
+  &__img {
+    margin-left: 24px;
+    width: 27px;
+    height: 30px;
+  }
+
+}
