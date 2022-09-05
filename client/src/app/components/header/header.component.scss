@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  height: 54px;
+  box-shadow: 0px 4px 10px rgba(var(--primary-color-rgb), 0.06);
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__aside-links {
+    display: flex;
+    align-items: center;
+
+    &--github {
+      margin-left: 50px;
+    }
+  }
+}

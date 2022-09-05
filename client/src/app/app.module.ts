@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ThemeSwitchComponent } from './components/theme-switch/theme-switch.component';
 import { MoonComponent } from './icons/moon/moon.component';
 import { SunComponent } from './icons/sun/sun.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThemeSwitchComponent,
     SunComponent,
-    MoonComponent
+    MoonComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserAnimationsModule,
