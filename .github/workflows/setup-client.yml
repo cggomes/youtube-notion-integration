@@ -1,4 +1,4 @@
-name: CI/CD Web App
+name: Angular App
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./app
+        working-directory: ./client
 
     strategy:
       matrix:
@@ -23,14 +23,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: app/package-lock.json
+        cache-dependency-path: client/package-lock.json
 
     - run: npm ci
-    - run: npx gulp
-    - run: rm -rf sass/
+    - run: npm test:prod
+    - run: npm run build:prod
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@4.1.5
       with:
         branch: gh-pages
-        folder: app/public
+        folder: client/dist/youtube-notion-angular
