@@ -99,7 +99,16 @@
               "src/styles.scss"
             ],
             "scripts": []
-          }
+          },
+          "configurations": {
+            "production": {
+              "sourceMap": false,
+              "codeCoverage": true,
+              "browsers": "ChromeHeadless",
+              "watch": false
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
