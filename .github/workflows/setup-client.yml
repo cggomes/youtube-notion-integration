@@ -26,7 +26,7 @@ jobs:
         cache-dependency-path: client/package-lock.json
 
     - run: npm ci
-    - run: npm test:prod
+    - run: npm run test:prod
     - run: npm run build:prod
 
     - name: Deploy 🚀
