@@ -10,6 +10,7 @@ import { MoonComponent } from './icons/moon/moon.component';
 import { SunComponent } from './icons/sun/sun.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchComponent } from './components/search/search.component';
     SunComponent,
     MoonComponent,
     HeaderComponent,
-    SearchComponent
+    SearchComponent,
+    HomeComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @use './app/styles/variables' as *;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Sriracha&display=swap');
+
 :root {
   --primary-color: #{$primary-color};
   --primary-color-rgb: #{$primary-color-rgb};
@@ -21,13 +23,27 @@ body.dark {
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+
 body {
   background-color: var(--secondary-color);
   transition: background 2s;
 }
 
-.container {
+.container,
+.content {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
+}
+
+.content {
+  padding-top: 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
