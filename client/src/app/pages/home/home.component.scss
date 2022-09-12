@@ -1,0 +1,44 @@
+@use '../../styles/variables' as *;
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 150px 16px 0 16px;
+
+  &__logo {
+    max-width: 230px;
+    height: 130px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__search {
+    max-width: 700px;
+    width: 100%;
+  }
+
+  &__button {
+    background-color: $primary-color;
+    color: $secondary-color;
+    box-shadow: -4px -4px 10px rgba(250, 250, 250, 0.15), 4px 4px 10px rgba(250, 250, 250, 0.15), inset 4px 4px 15px rgba(255, 255, 255, 0.1), inset -6px -6px 15px rgba(255, 255, 255, 0.15);
+    padding: 15px 25px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 36px;
+    width: 175px;
+    height: 56px;
+    font-size: 20px;
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}

@@ -4,6 +4,8 @@
   padding: 24px;
   height: 54px;
   box-shadow: 0px 4px 10px rgba(var(--primary-color-rgb), 0.06);
+  position: fixed;
+  width: 100%;
 
   &__container {
     display: flex;
