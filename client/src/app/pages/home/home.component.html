@@ -1,7 +1,7 @@
 <section class="home">
   <img
     class="home__logo"
-    src="assets/images/logo-light.svg"
+    src="assets/images/logo-{{ (isDarkMode$ | async) ? 'dark' : 'light' }}.svg"
     alt="Youtube & Notion logo">
 
   <form
