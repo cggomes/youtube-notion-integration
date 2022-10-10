@@ -45,11 +45,24 @@
 
 .github-detail {
   position: fixed;
-  bottom: 60px;
-  right: 40px;
+  bottom: 90px;
+  right: 16px;
   max-width: 1200px;
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1368px) {
     right: calc(50% - 500px);
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--primary-color);
+
+  a {
+    color: inherit;
+    font-size: 1rem;
   }
 }
