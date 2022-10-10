@@ -1,0 +1,44 @@
+
+
+@use '../../styles/variables' as *;
+
+.detail {
+  display: flex;
+  max-width: 380px;
+  padding: 16px;
+
+  &__text {
+    display: none;
+  }
+
+  &__link {
+    align-self: center;
+
+    img {
+      width: 71px;
+      height: 71px;
+    }
+  }
+}
+
+// For screens starting on 768px and up
+@media screen and (min-width: 768px) {
+  .detail {
+    border: 1px solid rgba(var(--primary-color-rgb), 0.06);
+    border-radius: 5px;
+    box-shadow: -4px -4px 10px rgba(var(--primary-color-rgb), 0.25), 4px 4px 10px rgba(var(--primary-color-rgb), 0.25), inset 4px -4px 10px rgba(var(--primary-color-rgb), 0.1);
+    background-color: $secondary-color;
+    gap: 10px;
+
+    &__text {
+      display: block;
+    }
+
+    &__link {
+      img {
+        width: 108px;
+        height: 108px;
+      }
+    }
+  }
+}
