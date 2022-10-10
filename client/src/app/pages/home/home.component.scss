@@ -44,7 +44,12 @@
 }
 
 .github-detail {
+  position: fixed;
+  bottom: 60px;
+  right: 40px;
   max-width: 1200px;
-  align-items: end;
-  padding-right: 16px;
+
+  @media screen and (min-width: 1024px) {
+    right: calc(50% - 500px);
+  }
 }
