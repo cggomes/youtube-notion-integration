@@ -25,7 +25,7 @@ export class HomeComponent {
 
   handleSubmit(): void {
     if (!!this.searchTerm) {
-      this.router.navigate([ '/results' ], {
+      this.router.navigate([ '/list' ], {
         queryParams: {
           searchTerm: this.searchTerm,
         },

@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,7 +24,8 @@ describe('HomeComponent', () => {
           provide: Router,
           useValue: routerMock
         }
-      ]
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
 
@@ -47,7 +49,7 @@ describe('HomeComponent', () => {
 
       expect(routerMock.navigate).toHaveBeenCalledTimes(1);
       expect(routerMock.navigate)
-        .toHaveBeenCalledWith(['/results'], {
+        .toHaveBeenCalledWith(['/list'], {
           queryParams: {
             searchTerm: 'christian-youtube-notion-integration',
           }

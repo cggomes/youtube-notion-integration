@@ -3,9 +3,11 @@
   align-items: center;
   padding: 24px;
   height: 54px;
+  background-color: var(--secondary-color);
   box-shadow: 0px 4px 10px rgba(var(--primary-color-rgb), 0.06);
   position: fixed;
   width: 100%;
+  z-index: 1;
 
   &__container {
     display: flex;
