@@ -106,6 +106,12 @@
               "codeCoverage": true,
               "browsers": "ChromeHeadless",
               "watch": false
+            },
+            "development": {
+              "sourceMap": false,
+              "codeCoverage": true,
+              "browsers": "Chrome",
+              "watch": false
             }
           },
           "defaultConfiguration": "production"

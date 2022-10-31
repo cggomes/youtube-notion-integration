@@ -1,0 +1,37 @@
+<section class="list container">
+  <form class="list__search">
+    <app-search></app-search>
+  </form>
+
+  <section class="list__result" *ngIf="playlists$ | async as playlists">
+    <h1>Resultados da pesquisa</h1>
+
+    <h2>{{ playlists[0].channelTitle }}</h2>
+
+    <hr>
+
+    <h3>
+      <img src="assets/images/ondemand_video.svg" alt="Logo of OnDemand Video">
+      Vídeos
+    </h3>
+
+    <ul class="playlists">
+      <li class="item" *ngFor="let item of playlists" tabindex="0">
+        <a class="card" [class.dark]="isDarkMode$ | async">
+          <img class="card__img" [src]="item.thumbnailSrc" alt="Playlist thumbnail">
+
+          <h4 class="card__title">{{ item.playlistTitle }}</h4>
+
+          <div class="card__details">
+            <p>
+            Youtube <span class="card__details--channel">{{ item.channelTitle }}</span>
+            </p>
+
+            <span>{{ item.publishedAt }}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+</section>
+

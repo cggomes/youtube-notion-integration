@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { ListComponent } from './pages/list/list.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,15 @@ import { DetailComponent } from './components/detail/detail.component';
     HeaderComponent,
     SearchComponent,
     HomeComponent,
-    DetailComponent
+    DetailComponent,
+    ListComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
