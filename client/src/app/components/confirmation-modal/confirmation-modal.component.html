@@ -1,0 +1,21 @@
+<dialog open #confirmationModal class="confirmation-modal">
+  <div class="confirmation-modal__content">
+    <h1 class="confirmation-modal__title">
+      Tem certeza que deseja adicionar o vídeo ao Notion?
+    </h1>
+
+    <div class="confirmation-modal__actions">
+      <button
+        (click)="handleClick(true)"
+        class="confirmation-modal__actions--primary"
+        #addButton
+      >
+        Adicionar
+      </button>
+
+      <button (click)="handleClick(false)">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</dialog>

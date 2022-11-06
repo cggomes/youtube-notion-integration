@@ -1,8 +1,8 @@
 export interface PlaylistResponseModel {
-  items: PlaylistItems[];
+  items: PlaylistItem[];
 }
 
-export interface PlaylistItems {
+export interface PlaylistItem {
   id: string;
   playlistTitle: string;
   channelTitle: string;
