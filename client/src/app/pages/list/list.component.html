@@ -16,7 +16,13 @@
     </h3>
 
     <ul class="playlists">
-      <li class="item" *ngFor="let item of playlists" tabindex="0">
+      <li 
+        class="item" 
+        *ngFor="let item of playlists" 
+        tabindex="0" 
+        (click)="handleItemClick(item)"
+        (keyup.enter)="handleItemClick(item)"
+      >
         <a class="card" [class.dark]="isDarkMode$ | async">
           <img class="card__img" [src]="item.thumbnailSrc" alt="Playlist thumbnail">
 
@@ -34,4 +40,3 @@
     </ul>
   </section>
 </section>
-

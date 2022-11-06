@@ -1,10 +1,11 @@
 import { ActivatedRoute } from '@angular/router';
-import { map, mergeMap, Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { map, mergeMap, Observable, take } from 'rxjs';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
 import { ThemeService } from './../../services/theme/theme.service';
 import { SearchService } from './../../services/search/search.service';
-import { PlaylistItems } from './../../models/PlaylistResponseModel';
+import { PlaylistItem } from './../../models/PlaylistResponseModel';
+import { ConfirmationModalComponent } from 'src/app/components/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-list',
@@ -14,12 +15,13 @@ import { PlaylistItems } from './../../models/PlaylistResponseModel';
 export class ListComponent implements OnInit {
 
   isDarkMode$!: Observable<boolean>;
-  playlists$!: Observable<PlaylistItems[]>;
+  playlists$!: Observable<PlaylistItem[]>;
 
   constructor(
     private themeService: ThemeService,
     private route: ActivatedRoute,
     private searchService: SearchService,
+    private viewContainerRef: ViewContainerRef,
   ) { }
 
   ngOnInit(): void {
@@ -36,4 +38,15 @@ export class ListComponent implements OnInit {
       );
   }
 
+  handleItemClick(item: PlaylistItem): void {
+    const component = this.viewContainerRef.createComponent(ConfirmationModalComponent);
+    component.instance.onClose
+      .pipe(take(1))
+      .subscribe(addPlaylist => {
+        console.log(addPlaylist);
+        if (addPlaylist) {
+          // TODO: call service
+        }
+      });
+  }
 }

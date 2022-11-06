@@ -14,6 +14,7 @@ import { SearchComponent } from './components/search/search.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { ListComponent } from './pages/list/list.component';
+import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ListComponent } from './pages/list/list.component';
     HomeComponent,
     DetailComponent,
     ListComponent,
+    ConfirmationModalComponent,
   ],
   imports: [
     BrowserAnimationsModule,
