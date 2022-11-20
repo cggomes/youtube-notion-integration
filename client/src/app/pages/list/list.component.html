@@ -16,10 +16,10 @@
     </h3>
 
     <ul class="playlists">
-      <li 
-        class="item" 
-        *ngFor="let item of playlists" 
-        tabindex="0" 
+      <li
+        class="item"
+        *ngFor="let item of playlists"
+        tabindex="0"
         (click)="handleItemClick(item)"
         (keyup.enter)="handleItemClick(item)"
       >
@@ -40,3 +40,5 @@
     </ul>
   </section>
 </section>
+
+<app-loading *ngIf="loading$ | async"></app-loading>
