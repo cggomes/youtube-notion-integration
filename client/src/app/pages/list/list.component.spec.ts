@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
@@ -29,12 +30,15 @@ describe('ListComponent', () => {
       providers: [
         {
           provide: ActivatedRoute,
-          useValue: activatedRouteMock 
+          useValue: activatedRouteMock
         },
         {
           provide: SearchService,
           useValue: searchServiceMock
         },
+      ],
+      imports: [
+        HttpClientTestingModule,
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
