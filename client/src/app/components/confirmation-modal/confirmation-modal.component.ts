@@ -28,6 +28,5 @@ export class ConfirmationModalComponent implements AfterViewInit {
 
   handleClick(addPlaylist: boolean): void {
     this.onClose.next(addPlaylist);
-    this.confirmationModal.nativeElement.close();
   }
 }

@@ -15,6 +15,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { ListComponent } from './pages/list/list.component';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     DetailComponent,
     ListComponent,
     ConfirmationModalComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserAnimationsModule,

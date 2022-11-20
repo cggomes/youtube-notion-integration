@@ -1,11 +1,12 @@
 import { ActivatedRoute } from '@angular/router';
-import { map, mergeMap, Observable, take } from 'rxjs';
+import { filter, map, mergeMap, Observable, take, tap, BehaviorSubject } from 'rxjs';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
+import { AddService } from './../../services/add/add.service';
 import { ThemeService } from './../../services/theme/theme.service';
 import { SearchService } from './../../services/search/search.service';
 import { PlaylistItem } from './../../models/PlaylistResponseModel';
-import { ConfirmationModalComponent } from 'src/app/components/confirmation-modal/confirmation-modal.component';
+import { ConfirmationModalComponent } from './../../components/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-list',
@@ -16,12 +17,14 @@ export class ListComponent implements OnInit {
 
   isDarkMode$!: Observable<boolean>;
   playlists$!: Observable<PlaylistItem[]>;
+  loading$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private themeService: ThemeService,
     private route: ActivatedRoute,
     private searchService: SearchService,
     private viewContainerRef: ViewContainerRef,
+    private addService: AddService,
   ) { }
 
   ngOnInit(): void {
@@ -41,12 +44,21 @@ export class ListComponent implements OnInit {
   handleItemClick(item: PlaylistItem): void {
     const component = this.viewContainerRef.createComponent(ConfirmationModalComponent);
     component.instance.onClose
-      .pipe(take(1))
-      .subscribe(addPlaylist => {
-        console.log(addPlaylist);
-        if (addPlaylist) {
-          // TODO: call service
-        }
+      .pipe(
+        take(1),
+        tap(addPlaylist => {
+          this.loading$.next(addPlaylist);
+          if (!addPlaylist) {
+            component.instance.confirmationModal.nativeElement.close();
+          }
+        }),
+        filter(addPlaylist => !!addPlaylist),
+        mergeMap(() => this.addService.addPlaylist(item.id))
+      )
+      .subscribe(() => {
+        component.instance.confirmationModal.nativeElement.close();
+        this.loading$.next(false);
+        alert('Playlist adicionada com sucesso!')
       });
   }
 }
